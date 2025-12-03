@@ -1,0 +1,30 @@
+{% include "includes/header.html" %}
+<div class="form-wrapper" id="form-wrapper">
+    <div id="successSection" class="dark-form">
+        <div class="success-checkmark">
+            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="check-circle" cx="26" cy="26" r="25" fill="none" />
+                <path class="check-tick" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+            </svg>
+        </div>
+        <h2 class="success-title">Nettoyage Terminé !</h2>
+        <p class="success-text">
+            Votre dataset a été prétraité et nettoyé avec succès.
+            Vous pouvez télécharger le fichier final ci-dessous.
+        </p>
+        
+        {% if download_url %}
+        <a class="download-btn" href="{{ download_url }}" download="dataset_cleaned.csv">
+            <button>Télécharger le Dataset Nettoyé</button>
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    // On enregistre définitivement que l'utilisateur a contribué
+    localStorage.setItem('userHasContributed', 'true');
+    
+    // Optionnel : On supprime l'ancien timer car on n'en a plus besoin
+    localStorage.removeItem('contributeModalClosedTime');
+</script>

@@ -1,0 +1,54 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+
+  <div class="course-page">
+
+    <!-- Titre du cours -->
+    <div class="course-header">
+      <h1>La Régression Linéaire</h1>
+      <p>Matière : Machine Learning | Semestre 5</p>
+    </div>
+
+    <!-- Section infos -->
+    <section class="course-section">
+      <h2>Détails du cours</h2>
+      <ul>
+        <li><b>Professeur :</b> Pr. Mohammed AMEKSA</li>
+        <li><b>Langue :</b> Français</li>
+      </ul>
+    </section>
+
+    <!-- Section caractéristiques -->
+    <section class="course-section">
+      <h2>Caractéristiques</h2>
+      <ul>
+        <li>Comprendre le principe de la régression linéaire</li>
+        <li>Apprentissage supervisé</li>
+        <li>Prévision de valeurs continues</li>
+        <li>Applications sur données réelles</li>
+      </ul>
+    </section>
+
+    <!-- Section PDF -->
+    <section class="course-section pdf-section">
+      <h2>Support du cours (PDF)</h2>
+
+      <iframe 
+        src="{% static 'pdfs/cours/RegLin_cours.pdf' %}"
+        class="pdf-viewer">
+      </iframe>
+
+      <div class="download-btn">
+        <a href="{% static 'pdfs/cours/RegLin_cours.pdf' %}" download>
+        <button>Télécharger le PDF</button>
+        </a>
+        </div>
+    </section>
+
+  </div>
+
+</main>
+
+{% include "includes/footer.html" %}

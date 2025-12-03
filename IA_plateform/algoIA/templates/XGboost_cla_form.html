@@ -1,0 +1,73 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+  <div class="form-container">
+
+    <!-- Image -->
+    <div class="form-image">
+      <img src="{% static 'images/hospital.png' %}" alt="Diabetes">
+    </div>
+
+    <h1>Prédiction du Diabète</h1>
+    <p>Veuillez saisir les informations médicales</p>
+
+    <form method="post" action="{% url 'XGboost_cla_prediction' %}">
+      {% csrf_token %}
+
+      <!-- 1. Nombre de grossesses -->
+      <div class="form-group">
+        <label for="pregnancies">Nombre de grossesses *</label>
+        <input type="number" id="pregnancies" name="Pregnancies" min="0" step="1" placeholder="Ex : 2" required>
+      </div>
+
+      <!-- 2. Glucose -->
+      <div class="form-group">
+        <label for="glucose">Glucose (mg/dL) *</label>
+        <input type="number" id="glucose" name="Glucose" min="0" step="1" placeholder="Ex : 120" required>
+      </div>
+
+      <!-- 3. Pression artérielle -->
+      <div class="form-group">
+        <label for="blood_pressure">Pression artérielle (mmHg) *</label>
+        <input type="number" id="blood_pressure" name="Blood_Pressure" min="0" step="1" placeholder="Ex : 70" required>
+      </div>
+
+      <!-- 4. Épaisseur du pli cutané -->
+      <div class="form-group">
+        <label for="skin_thickness">Épaisseur du pli cutané (mm) *</label>
+        <input type="number" id="skin_thickness" name="Skin_Thickness" min="0" step="1" placeholder="Ex : 20" required>
+      </div>
+
+      <!-- 5. Insuline -->
+      <div class="form-group">
+        <label for="insulin">Insuline (µU/mL) *</label>
+        <input type="number" id="insulin" name="Insulin" min="0" step="1" placeholder="Ex : 85" required>
+      </div>
+
+      <!-- 6. IMC -->
+      <div class="form-group">
+        <label for="bmi">IMC *</label>
+        <input type="number" id="bmi" name="Bmi" min="0" step="0.1" placeholder="Ex : 27.5" required>
+      </div>
+
+      <!-- 7. Antécédents familiaux -->
+      <div class="form-group">
+        <label for="dpf">Antécédents familiaux (DPF) *</label>
+        <input type="number" id="dpf" name="Diabetes_Pedigree" min="0" step="0.01" placeholder="Ex : 0.45" required>
+      </div>
+
+      <!-- 8. Âge -->
+      <div class="form-group">
+        <label for="age">Âge *</label>
+        <input type="number" id="age" name="Age" min="0" step="1" placeholder="Ex : 32" required>
+      </div>
+
+      <button type="submit">Prédiction du Modèle</button>
+
+    </form>
+
+  </div>
+</main>
+
+{% include "includes/footer.html" %}

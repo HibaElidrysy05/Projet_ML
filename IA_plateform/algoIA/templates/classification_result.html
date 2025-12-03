@@ -1,0 +1,43 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+  <div class="form-container">
+
+    <!-- Image -->
+    <div class="form-image">
+      <img src="{% static 'images/hospital.png' %}" alt="Image diabète">
+    </div>
+
+    <h1>Résultat de la prédiction</h1>
+    <p>Voici les données saisies et le résultat du modèle :</p>
+
+    <div class="result-group">
+      <p><strong>Nombre de grossesses :</strong> {{ input_data.Pregnancies }}</p>
+      <p><strong>Niveau de glucose :</strong> {{ input_data.Glucose }}</p>
+      <p><strong>Pression artérielle (mmHg) :</strong> {{ input_data.Blood_Pressure }}</p>
+      <p><strong>Épaisseur du pli cutané (mm) :</strong> {{ input_data.Skin_Thickness }}</p>
+      <p><strong>Insuline (µU/mL) :</strong> {{ input_data.Insulin }}</p>
+      <p><strong>IMC :</strong> {{ input_data.Bmi }}</p>
+      <p><strong>Antécédents familiaux (DPF) :</strong> {{ input_data.Diabetes_Pedigree }}</p>
+      <p><strong>Âge :</strong> {{ input_data.Age }}</p>
+    </div>
+
+    <h2>Résultat du modèle :  
+      <span>
+        {% if prediction == 1 %}
+          💡 <strong>Risque élevé de diabète</strong>
+        {% else %}
+          ✅ <strong>Aucun risque détecté</strong>
+        {% endif %}
+      </span>
+    </h2>
+
+    <a href="{% url 'index' %}">
+      <button type="button">Retour au formulaire</button>
+    </a>
+
+  </div>
+</main>
+
+{% include "includes/footer.html" %}

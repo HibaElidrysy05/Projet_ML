@@ -1,0 +1,206 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+  <div class="projects-container">
+    <h1>Nos Projets</h1>
+    <p>Découvrez nos différents projets ci-dessous.</p>
+
+    <div class="cards">
+
+
+      <!-- Carte 1 : regression lineaire -->
+      <div class="card">
+        <img src="{% static 'images/reg_lin.png' %}" alt="Projet 1">
+        <h2>La régression lineaire</h2>
+        <p class="card-description">Modèle simple qui apprend une relation linéaire entre les variables d’entrée et la sortie.
+Utilisé pour prédire des valeurs continues (prix, notes, quantités…).</p>
+        <div class="card-buttons">
+            <a href="{% url 'reg_lin_details' %}">
+            <button type="button">Plus détails</button>
+            </a>
+            <a href="{% url 'reg_lin_atelier' %}">
+            <button type="button">Exemple de Régression</button>
+            </a>
+        </div>
+      </div>
+
+      <!-- Carte 2 : regression logistique -->
+      <div class="card">
+        <img src="{% static 'images/regression_logistique.jpg' %}" alt="Projet 5">
+        <h2>La régression logistique</h2>
+        <p class="card-description">Classifieur qui prévoit des probabilités pour des classes (0/1).
+Il utilise une fonction sigmoïde pour transformer une combinaison linéaire des features en probabilité.</p>
+        <div class="card-buttons">
+            <a href="{% url 'regLog_details' %}">
+            <button type="button">Plus détails</button>
+            </a>
+            <a href="{% url 'regLog_atelier' %}">
+            <button type="button">Exemple de Classification</button>
+            </a>
+        </div>
+      </div>
+
+
+      <!-- Carte 3 : SVM -->
+      <div class="card">
+        <img src="{% static 'images/SVM.png' %}" alt="Projet 2">
+        <h2>SVM (Support Vector Machine)</h2>
+        <p class="card-description">Modèle qui cherche l’hyperplan optimal séparant les classes avec la plus grande marge.
+Avec un kernel, il peut résoudre des problèmes non linéaires.</p>
+        <div class="card-buttons">
+            <a href="{% url 'SVM_details' %}">
+            <button type="button">Plus détails</button>
+            </a>
+            <a href="{% url 'SVR_atelier' %}">
+            <button type="button">Exemple de SVR</button>
+            </a>
+            <a href="{% url 'SVC_atelier' %}">
+            <button type="button">Exemple de SVC</button>
+            </a>
+        </div>
+      </div>
+    
+      <!-- Carte 4 : Random Forest -->
+      <div class="card">
+        <img src="{% static 'images/random_Forest.jpg' %}" alt="Projet 3">
+        <h2>Random Forest</h2>
+        <p class="card-description">Ensemble de plusieurs arbres entraînés sur des échantillons différents.
+Il améliore la précision et réduit le surapprentissage par rapport à un arbre seul.</p>
+        <div class="card-buttons">
+            <a href="{% url 'randomFor_details' %}">
+            <button type="button">Plus détails</button>
+            </a>
+            <a href="{% url 'randomForest_reg_atelier' %}">
+            <button type="button">Exemple de regression</button>
+            </a>
+            <a href="{% url 'randomFor_cla_atelier' %}">
+            <button type="button">Exemple de classification</button>
+            </a>
+        </div>
+      </div>
+
+      <!-- Carte 5 : XGboost -->
+      <div class="card">
+        <img src="{% static 'images/XGboost.jpg' %}" alt="Projet 4">
+        <h2>XGBoost</h2>
+        <p class="card-description">Algorithme de boosting qui construit des arbres successifs pour corriger les erreurs précédentes.
+Il est rapide, efficace et offre d’excellentes performances sur les données tabulaires.</p>
+        <div class="card-buttons">
+            <a href="{% url 'XGboost_details' %}">
+            <button type="button">Plus détails</button>
+            </a>
+            <a href="{% url 'XGboost_reg_atelier' %}">
+            <button type="button">Exemple de regression</button>
+            </a>
+            <a href="{% url 'XGboost_cla_atelier' %}">
+            <button type="button">Exemple de classification</button>
+            </a>
+        </div>
+      </div>
+      
+      
+
+      <!-- Carte 6 : DT -->
+      <div class="card">
+        <img src="{% static 'images/DT.png' %}" alt="Projet 6">
+        <h2>Decision Tree (Arbre de Décision)</h2>
+        <p class="card-description">Modèle basé sur des règles si/sinon, qui découpe les données en sous-groupes homogènes.
+Très intuitif mais peut facilement overfitter.</p>
+        <div class="card-buttons">
+            <a href="{% url 'DT_details' %}">
+            <button type="button">Plus détails</button>
+            </a>
+            <a href="{% url 'DT_reg_atelier' %}">
+            <button type="button">Exemple de regression</button>
+            </a>
+            <a href="{% url 'DT_cla_atelier' %}">
+            <button type="button">Exemple de classification</button>
+            </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+
+
+
+
+<div id="contributeModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-glow"></div>
+        
+        <div class="modal-content">
+            <div class="modal-icon">
+                🚀
+            </div>
+            <h2>Contribuer au projet</h2>
+            <p>
+                Souhaitez-vous nous aider à développer ce projet en partageant vos idées ou vos informations ? Votre aide est précieuse !
+            </p>
+            
+            <div class="modal-actions">
+                <button id="closeModalBtn" class="btn-ghost">
+                    Plus tard
+                </button>
+                
+                <a href="{% url 'add_info_form' %}" class="btn-primary-glow">
+                    Ajouter mes infos
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- 1. VERIFICATION IMMEDIATE ---
+        // Si l'utilisateur a déjà envoyé des données, on arrête tout le script ici.
+        if (localStorage.getItem('userHasContributed') === 'true') {
+            return; 
+        }
+
+        const modal = document.getElementById('contributeModal');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const HOURS_BEFORE_RESHOW = 24; 
+        
+        // --- LOGIQUE TEMPORELLE (inchangée) ---
+        const lastClosedTime = localStorage.getItem('contributeModalClosedTime');
+        const now = new Date().getTime();
+        let shouldShow = true;
+        
+        if (lastClosedTime) {
+            const timePassed = now - parseInt(lastClosedTime);
+            const waitTimeInMs = HOURS_BEFORE_RESHOW * 60 * 60 * 1000;
+            if (timePassed < waitTimeInMs) {
+                shouldShow = false;
+            }
+        }
+
+        if (shouldShow) {
+            setTimeout(() => {
+                if(modal) modal.classList.add('active');
+            }, 1500);
+        }
+
+        // --- ACTIONS ---
+        if(closeBtn) {
+            closeBtn.addEventListener('click', closeAndSave);
+        }
+        if(modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) closeAndSave();
+            });
+        }
+
+        function closeAndSave() {
+            modal.classList.remove('active');
+            localStorage.setItem('contributeModalClosedTime', new Date().getTime().toString());
+        }
+    });
+</script>
+
+{% include "includes/footer.html" %}

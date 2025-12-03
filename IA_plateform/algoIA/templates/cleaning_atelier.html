@@ -1,0 +1,88 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+
+  <div class="course-page">
+
+    <!-- Titre de l'atelier -->
+    <div class="course-header">
+      <h1>Atelier : Le nettoyage des données</h1>
+      <p>Machine Learning | Semestre 5</p>
+    </div>
+
+    <!-- Section infos Dataset -->
+<section class="course-section">
+  <h2>Informations sur le programme de nettoyage</h2>
+    <p>Le programme de nettoyage utilisé dans notre projet est basique et ne traite pas tous les cas (il pourra être amélioré par la suite).
+<br><br>
+Tout d'abord, on effectue l'exportation du fichier .csv en choisissant également le délimiteur. Deux cas se présentent :
+</p>
+<ol>
+  <li>si le fichier contient un en-tête (header), il n’est pas nécessaire de le saisir.</li>
+  <li>sinon, on demande à l’utilisateur de fournir les noms des colonnes.</li>
+</ol>
+<p>
+Ensuite, on sépare les colonnes catégorielles et numériques. On commence par traiter les colonnes catégorielles en remplissant les valeurs manquantes par la mode, puis on effectue l’encodage de ces colonnes pour les transformer en valeurs numériques. Par la suite, on concatène les colonnes numériques avec les colonnes catégorielles encodées (qui deviennent ainsi également numériques).
+<br><br>
+Après cela, on remplit les valeurs manquantes dans l’ensemble du dataset. L’utilisateur peut choisir parmi plusieurs méthodes :
+</p>
+<ol>
+  <li>moyenne</li>
+  <li>médiane</li>
+  <li>imputation avancée (IterativeImputer)</li>
+</ol>
+<p>
+On supprime ensuite les observations dupliquées, puis on traite les valeurs aberrantes (outliers) en utilisant la méthode du capping : les valeurs inférieures à la frontière basse sont remplacées par cette dernière, et de même pour la frontière haute.
+<br><br>
+Enfin, on sépare les colonnes indépendantes (X) de la variable cible (y). Avant de retourner le nouveau dataset, on demande à l’utilisateur s’il souhaite appliquer une standardisation ou non. Le dataset final est renvoyé après concaténation horizontale de X et y et réindexation
+</p>
+</section>
+
+<section class="course-section">
+  <h2>Point de developement</h2>
+  <ul>
+    <li>Utilisation d’un modèle de régression basé sur un arbre de décision</li>
+    <li>Pas besoin de normalisation des données</li>
+    <li>Gestion des valeurs manquantes selon l’implémentation</li>
+    <li>Variables explicatives : distance parcourue, moment de la journée, jour de la semaine, nombre de passagers, trafic, météo, tarifs appliqués (base, prix/km, prix/min)</li>
+    <li>Évaluation avec MSE et R²</li>
+  </ul>
+</section>
+
+
+    <!-- Section PDF -->
+    <section class="course-section pdf-section">
+      <h2>Démonstration du code (PDF)</h2>
+
+      <iframe 
+        src="{% static 'pdfs/demonstration/Nettoyage.pdf' %}"
+        class="pdf-viewer">
+      </iframe>
+
+      <div class="download-btn">
+        <a href="{% static 'pdfs/demonstration/Nettoyage.pdf' %}" download>
+          <button>Télécharger le PDF</button>
+        </a>
+      </div>
+    </section>
+
+    <!-- Section Test du modèle -->
+    <section class="course-section">
+      <h2>Nettoyer votre DataSet</h2>
+      <p>
+        Cliquez sur le bouton ci-dessous pour nettoyer votre propre DataSet.
+      </p>
+
+      <div class="download-btn">
+        <a href="{% url 'cleaning_form' %}">
+          <button>Nettoyer votre DataSet</button>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+{% include "includes/footer.html" %}

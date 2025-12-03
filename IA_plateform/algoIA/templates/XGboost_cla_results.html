@@ -1,0 +1,27 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<div class="container">
+    <div class="card mb-3">
+        <div class="card-header">
+            <strong>Résultat de classification</strong>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="card-title">malade oui ou non  :</h5>
+                    <span class="badge bg-primary">{{malade_1_0}}</span>
+                    <img src="{% static img_result %}" class="img thumbnail card-img-top" style="width:350px">
+                </div>
+                <div class="col-md-6">
+                    <p>Le type du véhicule prédit basé sur les caractéristiques suivantes :</p>
+                    {% for key, value in initial_data.items %}
+                    <p><strong>{{key|capfirst}}:</strong> {{value}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}

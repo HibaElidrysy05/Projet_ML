@@ -1,0 +1,60 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+  <div class="team-page-container">
+    <h1>Notre Équipe</h1>
+    <p>Voici les membres de notre équipe et leurs informations.</p>
+
+    <div class="team-cards">
+
+      <div class="team-card">
+        <img src="{% static 'images/team/ayoub.jpeg' %}" alt="Membre 1">
+        <h2>Ayoub Aoubid</h2>
+        <p class="team-card-description">
+          <strong>Nom :</strong> Ayoub Aoubid<br>
+          <strong>Faculté :</strong> FSSM<br>
+          <strong>Filière :</strong> Licence Intelligence Artificielle<br>
+          <strong>Email :</strong> a.aoubid0052@uca.ac.ma
+        </p>
+        <div class="team-card-buttons">
+          <a href="mailto:a.aoubid0052@uca.ac.ma" class="team-btn-contact">Contacter</a>
+          <a href="https://www.linkedin.com/in/ayoub-aoubid-0292072b4/" target="_blank" class="team-btn-linkedin">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="{% static 'images/team/hiba.jpg' %}" alt="Membre 2">
+        <h2>Hiba El Idrysy</h2>
+        <p class="team-card-description">
+          <strong>Nom :</strong> Hiba El Idrysy<br>
+          <strong>Faculté :</strong> FSSM<br>
+          <strong>Filière :</strong> Licence Intelligence Artificielle<br>
+          <strong>Email :</strong> h.elidrysy8329@uca.ac.ma
+        </p>
+        <div class="team-card-buttons">
+          <a href="mailto:h.elidrysy8329@uca.ac.ma" class="team-btn-contact">Contacter</a>
+          <a href="https://www.linkedin.com/in/hibaelidrysy" target="_blank" class="team-btn-linkedin">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="{% static 'images/team3.jpg' %}" alt="Membre 3">
+        <h2>Abderrazak Maouloua</h2>
+        <p class="team-card-description">
+          <strong>Nom :</strong> Abderrazak Maouloua<br>
+          <strong>Faculté :</strong> FSSM<br>
+          <strong>Filière :</strong> Licence Intelligence Artificielle<br>
+          <strong>Email :</strong> a.maouloua1213@uca.ac.ma<br>
+        </p>
+        <div class="team-card-buttons">
+          <a href="mailto:a.maouloua1213@uca.ac.ma" class="team-btn-contact">Contacter</a>
+          <a href="https://www.linkedin.com/in/abderrazakmaouloua" target="_blank" class="team-btn-linkedin">LinkedIn</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+{% include "includes/footer.html" %}

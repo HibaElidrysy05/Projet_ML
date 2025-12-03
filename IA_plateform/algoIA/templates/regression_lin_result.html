@@ -1,0 +1,38 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+  <div class="form-container">
+
+    <!-- Image -->
+    <div class="form-image">
+      <img src="{% static 'images/taxi.png' %}" alt="Image taxi">
+    </div>
+
+    <h1>Résultat de la prédiction</h1>
+    <p>Voici les informations saisies et le prix predit :</p>
+
+    <div class="result-group">
+      <p><strong>Distance du trajet (km) :</strong> {{ input_data.Trip_Distance_km }}</p>
+      <p><strong>Moment de la journée :</strong> {{ input_data.Time_of_Day }}</p>
+      <p><strong>Type de jour :</strong> {{ input_data.Day_of_Week }}</p>
+      <p><strong>Nombre de passagers :</strong> {{ input_data.Passenger_Count }}</p>
+      <p><strong>Conditions de circulation :</strong> {{ input_data.Traffic_Conditions }}</p>
+      <p><strong>Conditions météo :</strong> {{ input_data.Weather }}</p>
+      <p><strong>Tarif de base :</strong> {{ input_data.Base_Fare }} DH</p>
+      <p><strong>Tarif par km :</strong> {{ input_data.Per_Km_Rate }} DH</p>
+      <p><strong>Tarif par minute :</strong> {{ input_data.Per_Minute_Rate }} DH</p>
+      <p><strong>Durée du trajet (minutes) :</strong> {{ input_data.Trip_Duration_Minutes }}</p>
+    </div>
+
+    <h2>Prix predit du trajet par RLM : <span>{{ predicted_price.0 }} DH</span></h2>
+    <h2>Prix predit du trajet par RLSL : <span>{{ predicted_price.1 }} DH</span></h2>
+
+    <a href="{% url 'index' %}">
+      <button type="button">Retour au formulaire</button>
+    </a>
+
+  </div>
+</main>
+
+{% include "includes/footer.html" %}

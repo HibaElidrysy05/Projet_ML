@@ -1,0 +1,165 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+    <div class="form-container" id="uploadFormContainer">
+
+        <div class="form-image">
+             
+        </div>
+
+        <h1>Importer & Nettoyer un Fichier CSV</h1>
+        <p>Téléchargez votre dataset et définissez les étapes de prétraitement basées sur votre script.</p>
+
+        <form id="csvUploadForm" method="post" action="{% url 'cleaning_proc' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="csvFile">Sélectionnez le fichier CSV *</label>
+                <input type="file" id="csvFile" name="csv_file" accept=".csv" required>
+            </div>
+
+            <div class="form-group form-group-separator">
+                <label>Votre dataset contient-il un <strong>en-tête (header)</strong> ?</label>
+                <div class="radio-group">
+                    <input type="radio" id="header_yes" name="has_header" value="yes" required onchange="toggleColumnNames()">
+                    <label for="header_yes" class="radio-btn">Oui</label>
+
+                    <input type="radio" id="header_no" name="has_header" value="no" onchange="toggleColumnNames()">
+                    <label for="header_no" class="radio-btn">Non</label>
+                </div>
+            </div>
+
+            <div class="form-group" id="columnNamesGroup" style="display: none;">
+                <label for="column_names">Noms des colonnes (séparés par des virgules) *</label>
+                <input type="text" id="column_names" name="column_names" placeholder="Ex: col1,col2,col3,..." >
+            </div>
+            <div class="form-group form-group-separator">
+                <label for="delimiter">Caractère séparateur (Delimiter) *</label>
+                <input type="text" id="delimiter" name="delimiter" placeholder="Ex: , ou ; ou |" value="," required>
+            </div>
+
+            <div class="form-group form-group-separator">
+                <label>Votre dataset contient-il une colonne <strong>ID</strong> ?</label>
+                <div class="radio-group">
+                    <input type="radio" id="id_yes" name="has_id" value="yes" required onchange="toggleIdNameInput()">
+                    <label for="id_yes" class="radio-btn">Oui</label>
+
+                    <input type="radio" id="id_no" name="has_id" value="no" onchange="toggleIdNameInput()">
+                    <label for="id_no" class="radio-btn">Non</label>
+                </div>
+            </div>
+
+            <div class="form-group" id="idNameGroup" style="display: none;">
+                <label for="id_name_input">Nom de la colonne ID *</label>
+                <input type="text" id="id_name_input" name="id_name" placeholder="Ex: id,ID,user_id,...">
+            </div>
+            <div class="form-group form-group-separator">
+                <label>Méthode de remplissage des valeurs manquantes :</label>
+                <div class="radio-group">
+                    <input type="radio" id="impute_intelligente" name="imputation_method" value="intelligente" required>
+                    <label for="impute_intelligente" class="radio-btn">Intelligente (Iterative Imputer)</label>
+                    <input type="radio" id="impute_moyenne" name="imputation_method" value="moyenne">
+                    <label for="impute_moyenne" class="radio-btn">Moyenne</label>
+                    <input type="radio" id="impute_mediane" name="imputation_method" value="mediane">
+                    <label for="impute_mediane" class="radio-btn">Médiane</label>
+                </div>
+            </div>
+
+            <div class="form-group form-group-separator">
+                <label for="target_column">Nom de la variable cible (Y) *</label>
+                <input type="text" id="target_column" name="target_column" 
+                        placeholder="Ex: Trip_Price ou Catégorie" required>
+            </div>
+            
+            
+            <div class="form-group form-group-separator">
+                <label>Souhaitez-vous appliquer la <strong>Standardisation</strong> ?</label>
+                <div class="radio-group">
+                    <input type="radio" id="standardize_yes" name="standardize" value="yes" required>
+                    <label for="standardize_yes" class="radio-btn">Oui (StandardScaler)</label>
+                    <input type="radio" id="standardize_no" name="standardize" value="no">
+                    <label for="standardize_no" class="radio-btn">Non</label>
+                </div>
+            </div>
+
+            <button type="submit">Lancer le Nettoyage & Prétraitement</button>
+        </form>
+
+        <a class="reset-btn" href="{% url 'cleaning_atelier'%}">Démonstration de nettoyage</a>
+    </div>
+
+</main>
+
+
+<script>
+    // Appelé au chargement de la page et lors du changement du choix "Header"
+    function toggleColumnNames() {
+        const columnNamesGroup = document.getElementById('columnNamesGroup');
+        const columnNamesInput = document.getElementById('column_names');
+
+        // *CORRECTION* : On vérifie si "Non" (header_no) est sélectionné. 
+        // Si PAS de header, l'utilisateur DOIT fournir les noms.
+        const isNoHeaderSelected = document.getElementById('header_no').checked;
+
+        if (isNoHeaderSelected) {
+            // Afficher le champ si "Non" est sélectionné
+            columnNamesGroup.style.display = 'block';
+            columnNamesInput.setAttribute('required', 'required');
+        } else {
+            // Masquer le champ si "Oui" est sélectionné
+            columnNamesGroup.style.display = 'none';
+            columnNamesInput.removeAttribute('required');
+            columnNamesInput.value = '';
+        }
+    }
+
+    // Appelé au chargement de la page et lors du changement du choix "ID"
+    function toggleIdNameInput() {
+        const idNameGroup = document.getElementById('idNameGroup');
+        // *CORRECTION* : Changement de l'ID pour correspondre au HTML corrigé
+        const idNameInput = document.getElementById('id_name_input'); 
+
+        // *CORRECTION* : On vérifie si "Oui" (id_yes) est sélectionné. 
+        // Si OUI, l'utilisateur DOIT fournir le nom de la colonne ID.
+        const isIdYesSelected = document.getElementById('id_yes').checked;
+
+        if (isIdYesSelected) {
+            // Afficher le champ si "Oui" est sélectionné
+            idNameGroup.style.display = 'block';
+            idNameInput.setAttribute('required', 'required'); // Rendre requis si affiché
+        } else {
+            // Masquer le champ si "Non" est sélectionné
+            idNameGroup.style.display = 'none';
+            idNameInput.removeAttribute('required');
+            idNameInput.value = '';
+        }
+    }
+
+    // DOMContentLoaded et resetForm mis à jour pour appeler les deux fonctions
+    document.addEventListener('DOMContentLoaded', () => {
+        // Gère l'état initial des deux contrôles
+        toggleColumnNames(); 
+        toggleIdNameInput(); 
+
+        const form = document.getElementById('csvUploadForm');
+        // ... (votre logique de soumission/reset ici)
+    });
+
+    function resetForm() {
+        const uploadContainer = document.getElementById('uploadFormContainer');
+        const successSection = document.getElementById('successSection');
+        const form = document.getElementById('csvUploadForm');
+
+        form.reset();
+        successSection.style.display = 'none';
+        uploadContainer.style.display = 'block';
+        
+        // Appeler les deux fonctions après le reset pour masquer/afficher correctement
+        toggleColumnNames(); 
+        toggleIdNameInput(); 
+    }
+
+</script>
+
+{% include "includes/footer.html" %}

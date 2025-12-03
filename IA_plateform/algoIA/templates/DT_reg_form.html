@@ -1,0 +1,120 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+  <div class="form-container">
+
+    <!-- Image -->
+    <div class="form-image">
+      <img src="{% static 'images/taxi.png' %}" alt="Taxi">
+    </div>
+
+    <h1>Formulaire Taxi</h1>
+    <p>Veuillez entrer les informations du trajet</p>
+
+    <form method="post" action="{% url 'DT_reg_prediction' %}">
+      {% csrf_token %}
+
+      <!-- 1. Distance du trajet -->
+      <div class="form-group">
+        <label for="distance">Distance du trajet (km) *</label>
+        <input type="number" id="distance" name="Trip_Distance_km" min="0" step="0.1" placeholder="Ex : 12.5" required>
+      </div>
+
+      <!-- 2. Moment de la journée -->
+      <div class="form-group">
+        <label>Moment de la journée *</label>
+        <div class="radio-group">
+          <input type="radio" id="morning" name="Time_of_Day" value="Morning" required>
+          <label for="morning" class="radio-btn">Matin</label>
+
+          <input type="radio" id="afternoon" name="Time_of_Day" value="Afternoon">
+          <label for="afternoon" class="radio-btn">Après-midi</label>
+
+          <input type="radio" id="evening" name="Time_of_Day" value="Evening">
+          <label for="evening" class="radio-btn">Soir</label>
+
+          <input type="radio" id="night" name="Time_of_Day" value="Night">
+          <label for="night" class="radio-btn">Nuit</label>
+        </div>
+      </div>
+
+      <!-- 3. Type de jour -->
+      <div class="form-group">
+        <label>Type de jour *</label>
+        <div class="radio-group">
+          <input type="radio" id="weekday" name="Day_of_Week" value="weekday" required>
+          <label for="weekday" class="radio-btn">Jour de semaine</label>
+
+          <input type="radio" id="weekend" name="Day_of_Week" value="weekend">
+          <label for="weekend" class="radio-btn">Week-end</label>
+        </div>
+      </div>
+
+      <!-- 4. Nombre de passagers -->
+      <div class="form-group">
+        <label for="passengers">Nombre de passagers *</label>
+        <input type="number" id="passengers" name="Passenger_Count" min="0" step="1" placeholder="Ex : 2" required>
+      </div>
+
+      <!-- 5. Conditions de circulation -->
+      <div class="form-group">
+        <label>Conditions de circulation *</label>
+        <div class="radio-group">
+          <input type="radio" id="low" name="Traffic_Conditions" value="low" required>
+          <label for="low" class="radio-btn">Faible</label>
+
+          <input type="radio" id="medium" name="Traffic_Conditions" value="medium">
+          <label for="medium" class="radio-btn">Moyenne</label>
+
+          <input type="radio" id="high" name="Traffic_Conditions" value="high">
+          <label for="high" class="radio-btn">Élevée</label>
+        </div>
+      </div>
+
+      <!-- 6. Conditions météo -->
+      <div class="form-group">
+        <label>Conditions météo *</label>
+        <div class="radio-group">
+          <input type="radio" id="clear" name="Weather" value="clear" required>
+          <label for="clear" class="radio-btn">Clair</label>
+
+          <input type="radio" id="rain" name="Weather" value="rain">
+          <label for="rain" class="radio-btn">Pluie</label>
+
+          <input type="radio" id="snow" name="Weather" value="snow">
+          <label for="snow" class="radio-btn">Neige</label>
+        </div>
+      </div>
+
+      <!-- 7. Tarif de base -->
+      <div class="form-group">
+        <label for="base_fare">Tarif de base *</label>
+        <input type="number" id="base_fare" name="Base_Fare" min="0" step="0.1" placeholder="Ex : 2.5" required>
+      </div>
+
+      <!-- 8. Tarif par km -->
+      <div class="form-group">
+        <label for="per_km">Tarif par km *</label>
+        <input type="number" id="per_km" name="Per_Km_Rate" min="0" step="0.1" placeholder="Ex : 1.3" required>
+      </div>
+
+      <!-- 9. Tarif par minute -->
+      <div class="form-group">
+        <label for="per_minute">Tarif par minute *</label>
+        <input type="number" id="per_minute" name="Per_Minute_Rate" min="0" step="0.01" placeholder="Ex : 0.5" required>
+      </div>
+
+      <!-- 10. Durée du trajet -->
+      <div class="form-group">
+        <label for="duration">Durée du trajet (minutes) *</label>
+        <input type="number" id="duration" name="Trip_Duration_Minutes" min="0" step="1" placeholder="Ex : 25" required>
+      </div>
+
+      <button type="submit">Prédire</button>
+    </form>
+
+  </div>
+</main>
+
+{% include "includes/footer.html" %}

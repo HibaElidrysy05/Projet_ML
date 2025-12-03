@@ -1,0 +1,84 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+
+  <div class="course-page">
+
+    <!-- Titre de l'atelier -->
+    <div class="course-header">
+      <h1>Atelier : Régression Linéaire</h1>
+      <p>Machine Learning | Semestre 5</p>
+    </div>
+
+    <!-- Section infos Dataset -->
+    <section class="course-section">
+      <h2>Informations sur le Dataset</h2>
+      <ul>
+        <li><b>Nom du dataset :</b> Taxi Trip</li>
+        <li><b>Nombre d'exemples :</b> 1000</li>
+        <li><b>Valeurs manquantes :</b> 50 valeurs manquantes réparties sur plusieurs colonnes</li>
+        <li><b>Nombre de variables :</b> 10 variables explicatives</li>
+        <li><b>Variable cible :</b> Trip_Price (prix final du trajet)</li>
+        <li><b>Source :</b> Dataset interne (trajets de taxi)</li>
+      </ul>
+    </section>
+
+    <!-- Section description -->
+    <section class="course-section">
+      <h2>Description</h2>
+      <ul>
+        <li>Utilisation d’un modèle de régression linéaire</li>
+        <li>Normalisation des données</li>
+        <li>Gestion des valeurs manquantes</li>
+        <li>Variables explicatives : distance parcourue, moment de la journée, jour de la semaine, nombre de passagers, trafic, météo, tarifs appliqués (base, prix/km, prix/min)</li>
+        <li>Évaluation avec MSE et R²</li>
+      </ul>
+    </section>
+
+    <!-- Section PDF -->
+    <section class="course-section pdf-section">
+      <h2>Démonstration du code (PDF)</h2>
+
+      <iframe 
+        src="{% static 'pdfs/demonstration/RLM_demo.pdf' %}"
+        class="pdf-viewer">
+      </iframe>
+
+      <div class="download-btn">
+        <a href="{% static 'pdfs/demonstration/RLM_demo2.pdf' %}" download>
+          <button>Télécharger le PDF</button>
+        </a>
+      </div>
+
+      <iframe 
+        src="{% static 'pdfs/demonstration/RLM_demo2.pdf' %}"
+        class="pdf-viewer">
+      </iframe>
+
+      <div class="download-btn">
+        <a href="{% static 'pdfs/demonstration/RLM_demo.pdf' %}" download>
+          <button>Télécharger le PDF</button>
+        </a>
+      </div>
+    </section>
+
+    <!-- Section Test du modèle -->
+    <section class="course-section">
+      <h2>Tester le modèle</h2>
+      <p>
+        Cliquez sur le bouton ci-dessous pour tester le modèle avec vos propres données.
+      </p>
+
+      <div class="download-btn">
+        <a href="{% url 'reg_lin_form' %}">
+          <button>Tester le modèle</button>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+{% include "includes/footer.html" %}

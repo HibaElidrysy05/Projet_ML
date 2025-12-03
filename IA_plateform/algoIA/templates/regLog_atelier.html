@@ -1,0 +1,72 @@
+{% include "includes/header.html" %}
+{% load static %}
+
+<main>
+
+  <div class="course-page">
+
+    <!-- Titre de l'atelier -->
+    <div class="course-header">
+      <h1>Atelier : Régression Logistique</h1>
+      <p>Machine Learning | Semestre 5</p>
+    </div>
+
+<section class="course-section">
+  <h2>Informations sur le Dataset</h2>
+  <ul>
+    <li><b>Nom du dataset :</b> Pima Indians Diabetes</li>
+    <li><b>Nombre d'exemples :</b> 768</li>
+    <li><b>Nombre de variables :</b> 8 attributs médicaux</li>
+    <li><b>Distribution classes :</b> 500 non-diabétiques (0), 268 diabétiques (1)</li>
+    <li><b>Variable cible :</b> Présence de diabète (0 ou 1)</li>
+    <li><b>Source :</b> UCI Machine Learning Repository</li>
+  </ul>
+</section>
+
+<section class="course-section">
+  <h2>Description</h2>
+  <ul>
+    <li>Utilisation d’un modèle de régression logistique</li>
+    <li>Normalisation des données</li>
+    <li>Gestion des valeurs aberrantes et zéros anormaux</li>
+    <li>Classification binaire : diabétique vs non-diabétique</li>
+    <li>Évaluation avec Accuracy, Precision, Recall, F1-score et Matrice de confusion</li>
+  </ul>
+</section>
+
+
+    <!-- Section PDF -->
+    <section class="course-section pdf-section">
+      <h2>Démonstration du code (PDF)</h2>
+
+      <iframe 
+        src="{% static 'pdfs/demonstration/CM.pdf' %}"
+        class="pdf-viewer">
+      </iframe>
+
+      <div class="download-btn">
+        <a href="{% static 'pdfs/demonstration/CM.pdf' %}" download>
+          <button>Télécharger le PDF</button>
+        </a>
+      </div>
+    </section>
+
+    <!-- Section Test du modèle -->
+    <section class="course-section">
+      <h2>Tester le modèle</h2>
+      <p>
+        Cliquez sur le bouton ci-dessous pour tester le modèle avec vos propres données.
+      </p>
+
+      <div class="download-btn">
+        <a href="{% url 'regLog_form' %}">
+          <button>Tester le modèle</button>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+{% include "includes/footer.html" %}
